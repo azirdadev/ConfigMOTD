@@ -12,7 +12,6 @@ namespace ConfigMOTD
 	[BepInPlugin("azir.configmotd", "CONFIGMOTD", "1.0.0")]
 	public class Plugin : BaseUnityPlugin
 	{
-		Text MOTDText;
 		Text MessageOfTheDwayText;
 
 		async void Start()
@@ -22,13 +21,11 @@ namespace ConfigMOTD
 			await Task.Delay(999);
 
 			MessageOfTheDwayText.text = ConfigMOTD.Scripts.Config.TopText.Value;
-			MOTDText.text = ConfigMOTD.Scripts.Config.MainText.Value;
 		}
 
 		void OnEnable()
 		{
 			MessageOfTheDwayText.text = ConfigMOTD.Scripts.Config.TopText.Value;
-			MOTDText.text = ConfigMOTD.Scripts.Config.MainText.Value;
 
 			HarmonyPatches.ApplyHarmonyPatches();
 		}
@@ -36,7 +33,6 @@ namespace ConfigMOTD
 		void OnDisable()
 		{
 			MessageOfTheDwayText.text = "MESSAGE OF THE DAY";
-			MOTDText.text = "IDK THE METHOD TO FIND MOTD";
 
 			HarmonyPatches.RemoveHarmonyPatches();
 		}
@@ -44,7 +40,6 @@ namespace ConfigMOTD
 		void OnGameInitialized(object sender, EventArgs e)
 		{
 			MessageOfTheDwayText = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct").GetComponent<Text>();
-			MOTDText = GameObject.Find("Environment Objects/LocalObjects_Prefab/TreeRoom/TreeRoomInteractables/UI/CodeOfConduct/COC Text").GetComponent<Text>();
 			ConfigMOTD.Scripts.Config.Initalize();
 		}
 	}
